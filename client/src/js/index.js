@@ -11,7 +11,7 @@ import { fetchCards } from "./cards";
 import Logo from '../images/logo.png';
 import Bear from '../images/bear.png';
 import Dog from '../images/dog.png';
-import { initDb, getDb, postDb, deleteDb } from "./database";
+import { initDb, getDb, postDb, deleteDb, editDb } from "./database";
 import { toggleForm, clearForm } from "./form";
 
 
@@ -31,12 +31,31 @@ window.addEventListener('load', function () {
     this.document.getElementById('dogThumbnail').src = Dog;
 });
 
+//When is this being called?
 window.deleteCard = (e) => {
     let id = parseInt(e.id);
+
+
 
     deleteDb(id);
 
     fetchCards();
+}
+
+window.editCard = (e) => {
+    profileId = parseInt(e.dataset.id);
+
+    let editName = e.dataset.name;
+    let editEmail = e.dataset.email;
+    let editPhone = e.dataset.phone;
+
+    document.getElementById("name").value = editName;
+    document.getElementById("phone").value = editPhone;
+    document.getElementById("email").value = editEmail;
+
+    form.style.display = "block";
+
+    submitBtnToUpdate = true;
 }
 
 
@@ -61,8 +80,14 @@ window.deleteCard = (e) => {
     // Post form data to IndexedDB OR Edit an existing card in IndexedDB
   if (submitBtnToUpdate == false) {
     postDb(name, email, phone, profile);
+    console.log("SUBMIT IS TRUE");
   } else {
-  
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+    let email = document.getElementById("email").value;
+    let profile = document.querySelector('input[type="radio"]:checked').value;
+
+    editDb(profileId, name, email, phone, profile);
     fetchCards();
       // Toggles the submit button back to POST functionality
     submitBtnToUpdate = false;
