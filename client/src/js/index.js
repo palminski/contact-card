@@ -11,7 +11,7 @@ import { fetchCards } from "./cards";
 import Logo from '../images/logo.png';
 import Bear from '../images/bear.png';
 import Dog from '../images/dog.png';
-import { initDb, getDb, postDb } from "./database";
+import { initDb, getDb, postDb, deleteDb } from "./database";
 import { toggleForm, clearForm } from "./form";
 
 
@@ -30,6 +30,15 @@ window.addEventListener('load', function () {
     this.document.getElementById('bearThumbnail').src = Bear;
     this.document.getElementById('dogThumbnail').src = Dog;
 });
+
+window.deleteCard = (e) => {
+    let id = parseInt(e.id);
+
+    deleteDb(id);
+
+    fetchCards();
+}
+
 
   // Form functionality
   const form = document.getElementById("formToggle");
