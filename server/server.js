@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3001;
 //ASK ABT THESE
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(express.static('../client/'));
+app.use(express.static('../client/dist'));
 
 app.listen(PORT, function() {
     console.log(`
