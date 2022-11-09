@@ -16,7 +16,22 @@ import { initDb, getDb, postDb, deleteDb, editDb } from "./database";
 import { toggleForm, clearForm } from "./form";
 
 
+const installBtn = document.getElementById('installBtn');
 
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  installBtn.style.visibility = 'visible';
+
+  installBtn.addEventListener('click', () => {
+    event.prompt();
+    installBtn.setAttribute('disabled',true);
+    installBtn.textContent = 'Installed!';
+  });
+});
+
+window.addEventListener('appinstalled', (event) => {
+  console.log('👍', 'appinstalled', event);
+});
 
 window.addEventListener('load', function () {
     initDb();
@@ -32,11 +47,9 @@ window.addEventListener('load', function () {
     this.document.getElementById('dogThumbnail').src = Dog;
 });
 
-//When is this being called?
+//When is this being called?--------------------------
 window.deleteCard = (e) => {
     let id = parseInt(e.id);
-
-
 
     deleteDb(id);
 

@@ -1,3 +1,7 @@
 #navbar-header {
-  color: rgb(185, 7, 7);
+  color: rgb(255, 255, 255);
+}
+
+#installBtn {
+  margin: 0 20px;
 }
