@@ -6,7 +6,7 @@
   "engines": {
     "node": "16.17.0"
   },
-  "heroku-prebuild": "npm install --dev",
+  
   "scripts": {
     "start:dev": "concurrently \"cd server && npm run server\" \"cd client && npm run dev\"",
     "start": "npm run build && cd server && node server.js",
